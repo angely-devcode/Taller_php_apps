@@ -4,15 +4,15 @@ require_once '../clases/Arbol.php';
 $mensajeError = '';
 $resultadoHTML = '';
 
-// Procesar el formulario al enviar
+/**Procesar el formulario al enviar */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Función para convertir la cadena ingresada ("A, B, C" o "A B C") en un arreglo
+    /**Función para convertir la cadena ingresada ("A, B, C" o "A B C") en un arreglo */
     function convertirAArreglo($cadena) {
         $cadena = trim($cadena);
         if (empty($cadena)) {
             return [];
         }
-        // Separar por comas o por espacios
+        /**Separar por comas o por espacios */
         $elementos = preg_split('/[\s,]+/', $cadena);
         return array_values(array_filter($elementos));
     }
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $inorden = convertirAArreglo($_POST['inorden'] ?? '');
     $postorden = convertirAArreglo($_POST['postorden'] ?? '');
 
-    // Contar cuántos recorridos ingresó el usuario
+    /**Contar cuántos recorridos ingresó el usuario */
     $ingresados = 0;
     if (!empty($preorden)) $ingresados++;
     if (!empty($inorden)) $ingresados++;
@@ -31,25 +31,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensajeError = "Debes ingresar al menos dos recorridos para construir el árbol.";
     } else {
         $arbol = new Arbol();
+        $detallesArreglos = "";
 
-        // Si ingresa los tres recorridos o (Preorden + Inorden) -> Usar Preorden + Inorden
+        /**Si ingresa los tres recorridos o Preorden - Inorden, entonces usa Preorden - Inorden */
         if (!empty($preorden) && !empty($inorden)) {
             $arbol->raiz = $arbol->construirPreIn($preorden, $inorden);
             $metodoUsado = "Preorden e Inorden";
+            $detallesArreglos .= "<li><strong>Preorden:</strong> " . implode(", ", $preorden) . "</li>";
+            $detallesArreglos .= "<li><strong>Inorden:</strong> " . implode(", ", $inorden) . "</li>";
         } 
-        // Inorden + Postorden
+        /**Inorden + Postorden */
         elseif (!empty($inorden) && !empty($postorden)) {
             $arbol->raiz = $arbol->construirInPost($inorden, $postorden);
             $metodoUsado = "Inorden y Postorden";
+            $detallesArreglos .= "<li><strong>Inorden:</strong> " . implode(", ", $inorden) . "</li>";
+            $detallesArreglos .= "<li><strong>Postorden:</strong> " . implode(", ", $postorden) . "</li>";
         } 
-        // Preorden + Postorden
+        /**Preorden + Postorden */
         elseif (!empty($preorden) && !empty($postorden)) {
             $arbol->raiz = $arbol->construirPrePost($preorden, $postorden);
             $metodoUsado = "Preorden y Postorden";
+            $detallesArreglos .= "<li><strong>Preorden:</strong> " . implode(", ", $preorden) . "</li>";
+            $detallesArreglos .= "<li><strong>Postorden:</strong> " . implode(", ", $postorden) . "</li>";
         }
 
         if ($arbol->raiz !== null) {
             $resultadoHTML = "<p>Árbol construido exitosamente usando <strong>$metodoUsado</strong>:</p>";
+            $resultadoHTML .= "<ul>" . $detallesArreglos . "</ul>";
+            $resultadoHTML .= "<h3>Estructura del Árbol:</h3>";
             $resultadoHTML .= $arbol->imprimirArbolHTML();
         } else {
             $mensajeError = "No se pudo construir el árbol. Verifica que los recorridos sean válidos y consistentes.";
@@ -100,6 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php echo $resultadoHTML; ?>
         </div>
     <?php endif; ?>
+
+    <br><a href="../index.php">Volver al menú principal</a>
 
 </body>
 </html>
