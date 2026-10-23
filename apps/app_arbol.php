@@ -7,7 +7,8 @@ $resultadoHTML = '';
 /**Procesar el formulario al enviar */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     /**Función para convertir la cadena ingresada ("A, B, C" o "A B C") en un arreglo */
-    function convertirAArreglo($cadena) {
+    function convertirAArreglo($cadena)
+    {
         $cadena = trim($cadena);
         if (empty($cadena)) {
             return [];
@@ -39,14 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $metodoUsado = "Preorden e Inorden";
             $detallesArreglos .= "<li><strong>Preorden:</strong> " . implode(", ", $preorden) . "</li>";
             $detallesArreglos .= "<li><strong>Inorden:</strong> " . implode(", ", $inorden) . "</li>";
-        } 
+        }
         /**Inorden + Postorden */
         elseif (!empty($inorden) && !empty($postorden)) {
             $arbol->raiz = $arbol->construirInPost($inorden, $postorden);
             $metodoUsado = "Inorden y Postorden";
             $detallesArreglos .= "<li><strong>Inorden:</strong> " . implode(", ", $inorden) . "</li>";
             $detallesArreglos .= "<li><strong>Postorden:</strong> " . implode(", ", $postorden) . "</li>";
-        } 
+        }
         /**Preorden + Postorden */
         elseif (!empty($preorden) && !empty($postorden)) {
             $arbol->raiz = $arbol->construirPrePost($preorden, $postorden);
@@ -68,53 +69,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>Construcción de Árbol Binario</title>
+    <title>Árbol Binario</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/arbol.css">
 </head>
+
 <body>
+    <div class="card">
+        <h1>Construcción de Árbol Binario</h1>
+        <p>Ingresa al menos dos recorridos separados por comas o espacios (Ejemplo: A, B, C, D o A B C D).</p>
 
-    <h1>Construcción de Árbol Binario</h1>
-    <p>Ingresa al menos dos recorridos separados por comas o espacios (Ejemplo: A, B, C, D o A B C D).</p>
+        <?php if (!empty($mensajeError)): ?>
+            <div>
+                <p><strong>Error:</strong> <?php echo htmlspecialchars($mensajeError); ?></p>
+            </div>
+        <?php endif; ?>
 
-    <?php if (!empty($mensajeError)): ?>
-        <div>
-            <p><strong>Error:</strong> <?php echo htmlspecialchars($mensajeError); ?></p>
-        </div>
-    <?php endif; ?>
+        <form action="app_arbol.php" method="POST">
+            <div>
+                <label for="preorden">Preorden:</label><br>
+                <input type="text" id="preorden" placeholder="Ej: A, B, C, D" name="preorden">
+            </div>
+            <br>
+            <div>
+                <label for="inorden">Inorden:</label><br>
+                <input type="text" id="inorden" name="inorden" placeholder="Ej: D, B, E, A">
+            </div>
+            <br>
+            <div>
+                <label for="postorden">Postorden:</label><br>
+                <input type="text" id="postorden" name="postorden" placeholder="Ej: H, I, L, C">
+            </div>
+            <br>
+            <button type="submit">Construir Árbol</button>
+        </form>
 
-    <form action="app_arbol.php" method="POST">
-        <div>
-            <label for="preorden">Preorden:</label><br>
-            <input type="text" id="preorden" placeholder="Ej: A, B, C, D" name="preorden">
-        </div>
-        <br>
-        <div>
-            <label for="inorden">Inorden:</label><br>
-            <input type="text" id="inorden" name="inorden" placeholder="Ej: D, B, E, A">
-        </div>
-        <br>
-        <div>
-            <label for="postorden">Postorden:</label><br>
-            <input type="text" id="postorden" name="postorden" placeholder="Ej: H, I, L, C">
-        </div>
-        <br>
-        <button type="submit">Construir Árbol</button>
-    </form>
+        <?php if (!empty($resultadoHTML)): ?>
+            <hr>
+            <h2>Resultado del Árbol</h2>
+            <div class="arbol-visual">
+                <div class="arbol-resumen">
+                    <?php echo $resultadoHTML; ?>
+                </div>
+            </div>
+        <?php endif; ?>
 
-    <?php if (!empty($resultadoHTML)): ?>
-        <hr>
-        <h2>Resultado del Árbol</h2>
-        <div>
-            <?php echo $resultadoHTML; ?>
-        </div>
-    <?php endif; ?>
-
-    <br><a href="../index.php">Volver al menú principal</a>
-
+        <br><a href="../index.php">Volver al menú principal</a>
+    </div>
 </body>
+
 </html>
-
-
-
-

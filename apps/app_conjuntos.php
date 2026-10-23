@@ -36,14 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Conjuntos</title>
-    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/conjuntos.css">
 </head>
+
 <body>
     <div class="card">
-        <h2>Operaciones con conjuntos</h2>
+        <h1>Operaciones con conjuntos</h1>
 
         <form method="POST">
             <label>Conjunto A (separado por comas):</label>
@@ -71,9 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ?>
 
         <br>
-        <a href="../index.php">Volver al menú</a>
+        <a href="../index.php">Volver al menú principal</a>
     </div>
 </body>
-</html>
 
-    
+</html>

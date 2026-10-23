@@ -1,0 +1,58 @@
+/* ESTILOS ESPECÍFICOS: CALCULADORA */
+.card .operaciones {
+    margin-top: 10px;
+}
+
+.botones-operacion {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.botones-operacion button {
+    min-width: 0;
+    min-height: 52px;
+    margin-top: 5px;
+    padding: 10px 5px;
+    font-size: 22px;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card ul li {
+    margin-bottom: 10px;
+    padding: 12px;
+    background: rgba(22, 75, 88, 0.55);
+    border: 1px solid rgba(85, 214, 207, 0.2);
+    border-radius: 8px;
+    overflow-wrap: anywhere;
+}
+
+.card form:has(input[name="accion"][value="borrar"]) button {
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+}
+
+.card form:has(input[name="accion"][value="borrar"]) button:hover {
+    background-color: #8b5c96;
+}
+
+.card a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .botones-operacion {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+
+
+

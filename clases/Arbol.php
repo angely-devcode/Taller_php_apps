@@ -1,12 +1,14 @@
 <?php
 
 /**Clase para representar cada nodo del árbol */
-class Nodo {
+class Nodo
+{
     public $valor;
     public $izquierdo;
     public $derecho;
 
-    public function __construct($valor) {
+    public function __construct($valor)
+    {
         $this->valor = $valor;
         $this->izquierdo = null;
         $this->derecho = null;
@@ -14,15 +16,18 @@ class Nodo {
 }
 
 /**Clase principal que maneja la lógica del Árbol Binario */
-class Arbol {
+class Arbol
+{
     public $raiz;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->raiz = null;
     }
 
     /**Construir usando PREORDEN e INORDEN */
-    public function construirPreIn($preorden, $inorden) {
+    public function construirPreIn($preorden, $inorden)
+    {
         if (empty($preorden) || empty($inorden)) {
             return null;
         }
@@ -50,7 +55,8 @@ class Arbol {
     }
 
     /**Construir usando INORDEN y POSTORDEN */
-    public function construirInPost($inorden, $postorden) {
+    public function construirInPost($inorden, $postorden)
+    {
         if (empty($inorden) || empty($postorden)) {
             return null;
         }
@@ -78,13 +84,15 @@ class Arbol {
     }
 
     /**Construir usando PREORDEN y POSTORDEN */
-    public function construirPrePost($preorden, $postorden) {
+    public function construirPrePost($preorden, $postorden)
+    {
         if (empty($preorden) || empty($postorden)) {
             return null;
         }
 
         $valorRaiz = array_shift($preorden);
-        array_pop($postorden); /**Eliminar la raíz actual de postorden */
+        array_pop($postorden);
+        /**Eliminar la raíz actual de postorden */
         $nodo = new Nodo($valorRaiz);
 
         if (empty($preorden)) {
@@ -109,8 +117,9 @@ class Arbol {
         return $nodo;
     }
 
-    /**Función auxiliar para imprimir el árbol visualmente en formato de lista */
-    public function imprimirArbolHTML($nodo = null, $nivel = 0) {
+    /**Función para imprimir el arbol*/
+    public function imprimirArbolHTML($nodo = null, $nivel = 0)
+    {
         if ($nodo === null && $nivel === 0) {
             $nodo = $this->raiz;
         }
@@ -119,18 +128,31 @@ class Arbol {
             return "";
         }
 
-        $html = "<ul>";
-        $html .= "<li><strong>" . htmlspecialchars($nodo->valor) . "</strong>";
+        $html = '<div class="nodo-arbol">';
+
+        $html .= '<div class="valor-nodo">';
+        $html .= htmlspecialchars($nodo->valor);
+        $html .= '</div>';
 
         if ($nodo->izquierdo !== null || $nodo->derecho !== null) {
-            $html .= "<ul>";
-            $html .= "<li><em>Izq:</em> " . ($nodo->izquierdo ? $this->imprimirArbolHTML($nodo->izquierdo, $nivel + 1) : "Vacio") . "</li>";
-            $html .= "<li><em>Der:</em> " . ($nodo->derecho ? $this->imprimirArbolHTML($nodo->derecho, $nivel + 1) : "Vacio") . "</li>";
-            $html .= "</ul>";
+            $html .= '<div class="ramas-arbol">';
+
+            $html .= '<div class="rama">';
+            if ($nodo->izquierdo !== null) {
+                $html .= $this->imprimirArbolHTML($nodo->izquierdo, $nivel + 1);
+            }
+            $html .= '</div>';
+
+            $html .= '<div class="rama">';
+            if ($nodo->derecho !== null) {
+                $html .= $this->imprimirArbolHTML($nodo->derecho, $nivel + 1);
+            }
+            $html .= '</div>';
+
+            $html .= '</div>';
         }
 
-        $html .= "</li>";
-        $html .= "</ul>";
+        $html .= '</div>';
 
         return $html;
     }

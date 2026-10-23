@@ -1,0 +1,22 @@
+/* ESTILOS ESPECÍFICOS: ESTADÍSTICA */
+
+.card form > p {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+/* Tarjetas internas para cada valor del resultado */
+.resultado p {
+    margin: 8px 0;
+    padding: 10px 12px;
+    background: rgba(40, 19, 51, 0.55);
+    border: 1px solid rgba(85, 214, 207, 0.2);
+    border-radius: 8px;
+}
+
+.card a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+}
+

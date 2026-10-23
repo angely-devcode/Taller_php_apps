@@ -36,13 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Estadística Básica</title>
-    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estadistica.css">
 </head>
 <body>
     <div class="card">
-        <h2>Promedio, Media y Moda</h2>
+        <h1>Promedio, Medina y Moda</h1>
         <form method="POST">
-            <label>Ingrese números separados por comas (ej: 4, 8, 15, 16, 23, 42):</label>
+            <p>Ingrese números separados por comas (ej: 4, 8, 15, 16, 23, 42):</p>
             <input type="text" name="numeros" required>
             <button type="submit">Calcular</button>
         </form>

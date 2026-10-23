@@ -1,0 +1,171 @@
+/* =========================================
+   PÁGINA PRINCIPAL (INDEX)
+   ========================================= */
+
+main.card {
+    width: calc(100% - 40px);
+    max-width: 1100px;
+    flex: 1;
+    margin: 35px auto;
+    padding: 30px;
+    background-color: rgba(35, 18, 48, 0.80);
+}
+
+main.card > h2 {
+    margin-top: 0;
+    margin-bottom: 28px;
+    font-size: 28px;
+    color: var(--color-primary);
+}
+
+/* Layout de 2 columnas */
+.contenido-inicio {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.15fr);
+    gap: 25px;
+    align-items: stretch;
+}
+
+.lista-aplicaciones ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-aplicaciones li {
+    margin-bottom: 12px;
+}
+
+/* Botones traslúcidos con texto blanco e ícono turquesa */
+.lista-aplicaciones a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 18px;
+    background: rgba(22, 12, 32, 0.70);
+    border: 1px solid rgba(226, 169, 243, 0.3);
+    border-radius: var(--radius-sm);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    line-height: 1.4;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s, color 0.3s;
+}
+
+/* Símbolo de Play que aparece con animación */
+.lista-aplicaciones a::after {
+    content: "▶";
+    font-size: 13px;
+    color: var(--color-primary);
+    opacity: 0;
+    transform: translateX(-8px) scale(0.5);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lista-aplicaciones a:hover::after,
+.lista-aplicaciones a:focus::after {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.lista-aplicaciones a:hover,
+.lista-aplicaciones a:focus {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #1a0a27;
+    transform: translateX(5px);
+    outline: none;
+    text-decoration: none;
+}
+
+.panel-presentacion {
+    display: flex;
+    align-items: stretch;
+    min-width: 0;
+    padding: 25px;
+    background: rgba(22, 12, 32, 0.50);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+}
+
+.panel-presentacion > div {
+    display: none;
+    width: 100%;
+    text-align: center;
+}
+
+.panel-presentacion .vista-previa-inicio {
+    display: block;
+}
+
+/* Interacción de vista previa :has */
+body:has(.lista-aplicaciones a[href*="app_acronimo.php"]:hover) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_acronimo.php"]:focus) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_sucesion.php"]:hover) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_sucesion.php"]:focus) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_estadistica.php"]:hover) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_estadistica.php"]:focus) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_conjuntos.php"]:hover) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_conjuntos.php"]:focus) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_binarios.php"]:hover) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_binarios.php"]:focus) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_arbol.php"]:hover) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_arbol.php"]:focus) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_calculadora.php"]:hover) .panel-presentacion .vista-previa-inicio,
+body:has(.lista-aplicaciones a[href*="app_calculadora.php"]:focus) .panel-presentacion .vista-previa-inicio {
+    display: none;
+}
+
+body:has(.lista-aplicaciones a[href*="app_acronimo.php"]:hover) .panel-presentacion .vista-previa-acronimo,
+body:has(.lista-aplicaciones a[href*="app_acronimo.php"]:focus) .panel-presentacion .vista-previa-acronimo,
+body:has(.lista-aplicaciones a[href*="app_sucesion.php"]:hover) .panel-presentacion .vista-previa-sucesion,
+body:has(.lista-aplicaciones a[href*="app_sucesion.php"]:focus) .panel-presentacion .vista-previa-sucesion,
+body:has(.lista-aplicaciones a[href*="app_estadistica.php"]:hover) .panel-presentacion .vista-previa-estadistica,
+body:has(.lista-aplicaciones a[href*="app_estadistica.php"]:focus) .panel-presentacion .vista-previa-estadistica,
+body:has(.lista-aplicaciones a[href*="app_conjuntos.php"]:hover) .panel-presentacion .vista-previa-conjuntos,
+body:has(.lista-aplicaciones a[href*="app_conjuntos.php"]:focus) .panel-presentacion .vista-previa-conjuntos,
+body:has(.lista-aplicaciones a[href*="app_binarios.php"]:hover) .panel-presentacion .vista-previa-binarios,
+body:has(.lista-aplicaciones a[href*="app_binarios.php"]:focus) .panel-presentacion .vista-previa-binarios,
+body:has(.lista-aplicaciones a[href*="app_arbol.php"]:hover) .panel-presentacion .vista-previa-arbol,
+body:has(.lista-aplicaciones a[href*="app_arbol.php"]:focus) .panel-presentacion .vista-previa-arbol,
+body:has(.lista-aplicaciones a[href*="app_calculadora.php"]:hover) .panel-presentacion .vista-previa-calculadora,
+body:has(.lista-aplicaciones a[href*="app_calculadora.php"]:focus) .panel-presentacion .vista-previa-calculadora {
+    display: block;
+}
+
+.panel-presentacion img {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    max-height: 220px;
+    object-fit: contain;
+    margin: 0 auto 18px;
+    border-radius: 12px;
+}
+
+.panel-presentacion h3 {
+    color: var(--color-primary);
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+.panel-presentacion p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+@media (max-width: 750px) {
+    header { padding: 18px 15px; }
+    .logo { gap: 12px; }
+    .logo img { width: 55px; height: 55px; }
+    .logo h1 { font-size: 26px; }
+    main.card {
+        width: calc(100% - 24px);
+        padding: 22px 16px;
+        margin: 20px auto;
+    }
+    main.card > h2 { font-size: 23px; }
+    .contenido-inicio { grid-template-columns: 1fr; }
+    .panel-presentacion { min-height: 280px; }
+}

@@ -1,0 +1,274 @@
+/* =========================================
+   1. PALETA BASADA EN TU IMAGEN DE FONDO
+   ========================================= */
+:root {
+    /* Contenedores morados traslúcidos para dejar ver el fondo de polígonos */
+    --bg-card: rgba(35, 18, 48, 0.82);
+    --bg-input: rgba(22, 12, 32, 0.75);
+    --bg-box-result: rgba(48, 24, 68, 0.65);
+    
+    /* Colores extraídos directamente de la gama visual */
+    --color-primary: #55d6cf;      /* Verde turquesa vibrante */
+    --color-secondary: #e2a9f3;    /* Rosa/Lila claro de los polígonos superiores */
+    --color-accent-purple: #a855f7;/* Morado magenta */
+    --color-text: #ffffff;         /* Blanco limpio */
+    --border-color: rgba(226, 169, 243, 0.35);
+    
+    --radius-main: 22px;
+    --radius-sm: 12px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Integración completa de la imagen de fondo 'fondo.jpg' */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--color-text);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+    /* Imagen de fondo fija */
+    background-image: url('../recursos/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* =========================================
+   2. ENCABEZADO Y PIE DE PÁGINA
+   ========================================= */
+header {
+    padding: 22px 30px;
+    background: rgba(25, 12, 36, 0.85);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(8px);
+}
+
+footer {
+    padding: 20px;
+    background: rgba(25, 12, 36, 0.85);
+    border-top: 1px solid var(--border-color);
+    color: var(--color-text);
+    text-align: center;
+    font-size: 14px;
+    margin-top: auto;
+    backdrop-filter: blur(8px);
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+.logo img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
+
+.logo h1 {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: 34px;
+    text-shadow: 0 0 12px rgba(85, 214, 207, 0.4);
+}
+
+/* =========================================
+   3. ESTRUCTURA DE LA TARJETA (CARD)
+   ========================================= */
+.card {
+    display: block;
+    width: calc(100% - 30px);
+    max-width: 750px;
+    margin: 30px auto;
+    padding: 35px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-main);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+}
+
+.card h1,
+.card h2 {
+    color: var(--color-primary);
+    text-align: center;
+    line-height: 1.4;
+}
+
+.card h1 {
+    font-size: 28px;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.card h2 {
+    font-size: 23px;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+/* =========================================
+   4. FORMULARIOS E INPUTS
+   ========================================= */
+.card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card label {
+    display: block;
+    margin-top: 5px;
+    color: var(--color-secondary);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.card input[type="text"],
+.card input[type="number"],
+.card select,
+.card textarea {
+    width: 100%;
+    padding: 13px 15px;
+    background-color: var(--bg-input);
+    color: #ffffff;
+    border: 1px solid rgba(226, 169, 243, 0.4);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.card input:focus,
+.card select:focus,
+.card textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px rgba(85, 214, 207, 0.4);
+}
+
+.card select option {
+    background-color: #231230;
+    color: #ffffff;
+}
+
+/* Botón Verde Turquesa con contraste óptimo */
+.card button {
+    padding: 13px 18px;
+    margin-top: 10px;
+    background-color: var(--color-primary);
+    color: #1a0a27;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.card button:hover {
+    background-color: #84f2ec;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(85, 214, 207, 0.4);
+}
+
+.card a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.card a:hover {
+    color: var(--color-secondary);
+    text-decoration: none;
+}
+
+.card hr {
+    margin: 25px 0;
+    border: none;
+    border-top: 1px solid var(--border-color);
+}
+
+/* =========================================
+   5. CONTENEDOR VISUAL DE RESULTADOS
+   ========================================= */
+.resultado,
+.arbol-visual {
+    width: 100%;
+    margin-top: 25px;
+    padding: 20px;
+    background: var(--bg-box-result);
+    border: 1px solid rgba(85, 214, 207, 0.4);
+    border-radius: 14px;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: auto;
+    overflow-wrap: anywhere;
+}
+
+.resultado h3,
+.arbol-visual h3 {
+    color: var(--color-primary);
+}
+
+.resultado strong,
+.arbol-visual strong {
+    color: var(--color-secondary);
+}
+
+.resultado p,
+.arbol-visual p {
+    margin: 8px 0;
+}
+
+.resultado ul,
+.arbol-visual ul {
+    padding-left: 25px;
+}
+
+@media (max-width: 600px) {
+    .card {
+        width: calc(100% - 24px);
+        padding: 24px 18px;
+        margin: 20px auto;
+        border-radius: 16px;
+    }
+    .card h1 { font-size: 23px; }
+    .card h2 { font-size: 20px; }
+}
+
+/* Botón estilizado para regresar al menú */
+.card a[href*="index.php"] {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 11px 22px;
+    background-color: rgba(168, 85, 247, 0.25);
+    color: var(--color-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s, color 0.3s;
+}
+
+.card a[href*="index.php"]:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #1a0a27;
+    transform: translateY(-2px);
+    text-decoration: none;
+}

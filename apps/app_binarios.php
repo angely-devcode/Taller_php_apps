@@ -17,11 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Decimal a Binario</title>
-    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/binarios.css">
 </head>
 <body>
     <div class="card">
-        <h2>Convierte un número decimal a binario</h2>
+        <h1>Convierte un número decimal a binario</h1>
 
         <form method="POST">
             <label>Número entero:</label>
@@ -44,8 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         ?>
 
-        <br>
-        <a href="../index.php">Volver al menú</a>
+        <br><a href="../index.php">Volver al menú principal</a>
     </div>
 </body>
 </html>

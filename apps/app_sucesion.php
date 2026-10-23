@@ -23,11 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Fibonacci / Factorial</title>
-    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/sucesion.css">
 </head>
 <body>
     <div class="card">
-        <h2>Selecciona una opción y conoce su sucesión Fibonacci o su factorial.</h2>
+        <h1>Sucesión Fibonacci o Factorial de un número</h1>
+        <p>Escribe un número y conoce su sucesión Fibonacci o su factorial:</p>
+
         <form method="POST">
             <label>Número:</label>
             <input type="number" name="numero" min="1" required>

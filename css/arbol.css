@@ -1,0 +1,158 @@
+/* ESTILOS ESPECÍFICOS: ÁRBOL BINARIO */
+.card {
+    max-width: 950px;
+}
+
+.card form > div {
+    margin-bottom: 8px;
+}
+
+.card a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* =========================================
+   ESTILOS ESPECÍFICOS Y ESTRUCTURA DEL ÁRBOL
+   ========================================= */
+
+/* Contenedor principal de resultados */
+.arbol-visual {
+    display: flex;
+    flex-direction: column; /* Apila el texto arriba y el árbol abajo */
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    padding: 25px 20px;
+    background: var(--bg-box-result);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+}
+
+/* Sección de texto e información */
+.arbol-resumen {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.arbol-resumen h3 {
+    color: var(--color-primary);
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.arbol-resumen ul {
+    padding-left: 25px;
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   ESTRUCTURA GRÁFICA DEL ÁRBOL BINARIO
+   ========================================= */
+
+/* Área contenedora del dibujo del árbol */
+.arbol-visual .nodo-arbol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 15px;
+    width: 100%;
+}
+
+/* Esfera/Caja del valor del nodo */
+.valor-nodo {
+    width: 44px;
+    height: 44px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #12091d;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 0 12px rgba(85, 214, 207, 0.4);
+    z-index: 2;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.valor-nodo:hover {
+    transform: scale(1.15);
+    background-color: var(--color-primary);
+    color: #1a0a27;
+}
+
+/* Contenedor de las ramas (hijos) */
+.ramas-arbol {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding-top: 20px;
+    width: 100%;
+}
+
+/* Línea vertical superior hacia el padre */
+.ramas-arbol::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-left: 2px solid var(--border-color);
+    width: 0;
+    height: 20px;
+}
+
+/* Cada rama individual (izquierda y derecha) */
+.rama {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 0 15px;
+}
+
+/* Conectores horizontales y verticales hacia los hijos */
+.rama::before, .rama::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 50%;
+    border-top: 2px solid var(--border-color);
+    width: 50%;
+    height: 20px;
+}
+
+.rama::after {
+    right: auto;
+    left: 50%;
+    border-left: 2px solid var(--border-color);
+}
+
+.rama:only-child::after, .rama:only-child::before {
+    display: none;
+}
+
+.rama:only-child {
+    padding-top: 0;
+}
+
+.rama:first-child::before {
+    border: none;
+}
+
+.rama:last-child::after {
+    border: none;
+}
+
+.rama:last-child::before {
+    border-right: 2px solid var(--border-color);
+    border-radius: 0 10px 0 0;
+}
+
+.rama:first-child::after {
+    border-radius: 10px 0 0 0;
+}

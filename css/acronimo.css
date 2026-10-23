@@ -1,0 +1,13 @@
+
+/* ESTILOS ESPECÍFICOS: CONVERTIDOR DE ACRÓNIMOS */
+.card input[type="text"] {
+    min-height: 48px;
+}
+
+.card a {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+}
+
+
