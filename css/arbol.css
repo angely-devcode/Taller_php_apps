@@ -1,4 +1,3 @@
-/* ESTILOS ESPECÍFICOS: ÁRBOL BINARIO */
 .card {
     max-width: 950px;
 }
@@ -12,10 +11,6 @@
     margin-top: 15px;
     text-align: center;
 }
-
-/* =========================================
-   ESTILOS ESPECÍFICOS Y ESTRUCTURA DEL ÁRBOL
-   ========================================= */
 
 /* Contenedor principal de resultados */
 .arbol-visual {
@@ -49,10 +44,6 @@
     margin-bottom: 15px;
 }
 
-/* =========================================
-   ESTRUCTURA GRÁFICA DEL ÁRBOL BINARIO
-   ========================================= */
-
 /* Área contenedora del dibujo del árbol */
 .arbol-visual .nodo-arbol {
     display: flex;
@@ -78,12 +69,6 @@
     box-shadow: 0 0 12px rgba(85, 214, 207, 0.4);
     z-index: 2;
     transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.valor-nodo:hover {
-    transform: scale(1.15);
-    background-color: var(--color-primary);
-    color: #1a0a27;
 }
 
 /* Contenedor de las ramas (hijos) */

@@ -1,36 +1,48 @@
 <?php
 require_once '../clases/Calculadora.php';
-
 $calculadora = new Calculadora();
+
+/* Se preparan las variables para guardar el resultado y los posibles errores */
 $resultado = null;
 $error = null;
 
-// Procesar cuando el usuario presiona "Calcular"
+/* Se comprueba si se ha enviado el formulario para calcular */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'calcular') {
+
+    /* Se obtienen los numros ingresados y se convierten a decimales */
     $num1 = isset($_POST['num1']) && $_POST['num1'] !== '' ? (float)$_POST['num1'] : null;
     $num2 = isset($_POST['num2']) && $_POST['num2'] !== '' ? (float)$_POST['num2'] : null;
+
+    /* Se obtiene el tipo de operacion seleccionada */
     $operacion = $_POST['operacion'] ?? '';
 
+    /* Se revisa si alguno de los números está vacío */
     if ($num1 === null || $num2 === null) {
         $error = "Por favor, ingresa ambos números.";
     } else {
+
+        /* Se envían los valores a la clase para realizar el cálculo */
         $res = $calculadora->calcular($num1, $num2, $operacion);
 
+        /* Se comprueba si la respuesta es un número */
         if (is_numeric($res)) {
             $resultado = $res;
         } else {
-            $error = $res; // Si devuelve un mensaje de error (ej. división por cero)
+            /* Se guarda el mensaje recibido cuando ocurre un error */
+            $error = $res;
         }
     }
 }
 
-// Procesar cuando el usuario presiona "Borrar Historial"
+/* Se comprueba si se ha enviado la solicitud para borrar el historial */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['accion'] === 'borrar') {
     $calculadora->borrarHistorial();
 }
 
+/* Se obtiene la lista de operacoines guardadas */
 $historial = $calculadora->getHistorial();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -45,7 +57,6 @@ $historial = $calculadora->getHistorial();
     <div class="card">
         <h1>Calculadora</h1>
 
-        <!-- Formulario Principal -->
         <form action="app_calculadora.php" method="POST">
             <input type="hidden" name="accion" value="calcular">
 
@@ -83,10 +94,9 @@ $historial = $calculadora->getHistorial();
             </div>
         </form>
 
-        <!-- Mostrar Resultado o Errores -->
         <?php if ($resultado !== null): ?>
             <div>
-                <h2>Resultado: <?php echo htmlspecialchars($resultado); ?></h2>
+                <h2>Resultado: <?php echo htmlspecialchars((string)$resultado); ?></h2>
             </div>
         <?php endif; ?>
 
@@ -98,7 +108,6 @@ $historial = $calculadora->getHistorial();
 
         <hr>
 
-        <!-- Sección de Historial -->
         <h2>Historial de Operaciones</h2>
 
         <?php if (!empty($historial)): ?>
@@ -108,7 +117,6 @@ $historial = $calculadora->getHistorial();
                 <?php endforeach; ?>
             </ul>
 
-            <!-- Formulario para borrar el historial -->
             <form action="app_calculadora.php" method="POST">
                 <input type="hidden" name="accion" value="borrar">
                 <button type="submit">Borrar Historial</button>

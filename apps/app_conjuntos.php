@@ -1,35 +1,66 @@
 <?php
+
 require_once '../clases/Conjuntos.php';
+
+/* Se inicializan las variables donde se guardan los resultados */
 $resultadoUnion = null;
 $resultadoInterseccion = null;
 $resultadoDiferenciaAB = null;
 $resultadoDiferenciaBA = null;
 
+/* Se comprueba si se ha enviado el formulario */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    /* Se obtienen los valores escritos para cada conjunto */
     $textoConjuntoA = $_POST['conjuntoA'];
     $textoConjuntoB = $_POST['conjuntoB'];
 
+    /* Se separan los elementos de cada conjunto usando las comas */
     $elementosA = explode(',', $textoConjuntoA);
     $elementosB = explode(',', $textoConjuntoB);
 
+    /* Se crean las listas vacias donde se guardan los numeros */
     $conjuntoA = [];
     $conjuntoB = [];
 
+    /*
+        Se recorre la lista de elementos del conjunto A
+        para limpiar los espacios y convertir cada valor en un numro entero
+    */
     foreach ($elementosA as $elemento) {
+
+        /* Se eliminan los espacios al principio y al final del elemento */
         $elemento = trim($elemento);
+
+        /* Se convierte el elemento en un numero entero y se agrega al conjunto A */
         $conjuntoA[] = (int)$elemento;
     }
 
+    /*
+        Se recorre la lista de elementos del conjunto B
+        para limpiar los espacios y convertir cada valor en un numero entero
+    */
     foreach ($elementosB as $elemento) {
+
+        /* Se eliminan los espacios al principio y al final del elemento */
         $elemento = trim($elemento);
+
+        /* Se convierte el elemento en un numero entero y se agrega al conjunto B */
         $conjuntoB[] = (int)$elemento;
     }
 
     $operaciones = new Conjuntos();
 
+    /* Se obtiene la union de los dos conjuntos */
     $resultadoUnion = $operaciones->union($conjuntoA, $conjuntoB);
+
+    /* Se obtienen los elementos que aparecen en ambos conjuntos */
     $resultadoInterseccion = $operaciones->interseccion($conjuntoA, $conjuntoB);
+
+    /* Se obtienen los elementos que estan en A pero no en B */
     $resultadoDiferenciaAB = $operaciones->diferencia($conjuntoA, $conjuntoB);
+
+    /* Se obtienen los elementos que estan en B pero no en A */
     $resultadoDiferenciaBA = $operaciones->diferencia($conjuntoB, $conjuntoA);
 }
 ?>
@@ -59,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <?php
+        /* Se comprueba si se han calculado los resultados */
         if ($resultadoUnion !== null) {
         ?>
             <div class="resultado">

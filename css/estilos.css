@@ -1,19 +1,20 @@
-/* =========================================
-   1. PALETA BASADA EN TU IMAGEN DE FONDO
-   ========================================= */
 :root {
     /* Contenedores morados traslúcidos para dejar ver el fondo de polígonos */
     --bg-card: rgba(35, 18, 48, 0.82);
     --bg-input: rgba(22, 12, 32, 0.75);
     --bg-box-result: rgba(48, 24, 68, 0.65);
-    
+
     /* Colores extraídos directamente de la gama visual */
-    --color-primary: #55d6cf;      /* Verde turquesa vibrante */
-    --color-secondary: #e2a9f3;    /* Rosa/Lila claro de los polígonos superiores */
-    --color-accent-purple: #a855f7;/* Morado magenta */
-    --color-text: #ffffff;         /* Blanco limpio */
+    --color-primary: #55d6cf;
+    /* Verde turquesa vibrante */
+    --color-secondary: #e2a9f3;
+    /* Rosa/Lila claro de los polígonos superiores */
+    --color-accent-purple: #a855f7;
+    /* Morado magenta */
+    --color-text: #ffffff;
+    /* Blanco limpio */
     --border-color: rgba(226, 169, 243, 0.35);
-    
+
     --radius-main: 22px;
     --radius-sm: 12px;
 }
@@ -22,7 +23,6 @@
     box-sizing: border-box;
 }
 
-/* Integración completa de la imagen de fondo 'fondo.jpg' */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--color-text);
@@ -30,8 +30,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    
-    /* Imagen de fondo fija */
+
     background-image: url('../recursos/fondo.jpg');
     background-size: cover;
     background-position: center;
@@ -39,9 +38,7 @@ body {
     background-attachment: fixed;
 }
 
-/* =========================================
-   2. ENCABEZADO Y PIE DE PÁGINA
-   ========================================= */
+/* ENCABEZADO Y PIE DE PÁGINA */
 header {
     padding: 22px 30px;
     background: rgba(25, 12, 36, 0.85);
@@ -80,9 +77,7 @@ footer {
     text-shadow: 0 0 12px rgba(85, 214, 207, 0.4);
 }
 
-/* =========================================
-   3. ESTRUCTURA DE LA TARJETA (CARD)
-   ========================================= */
+/* ESTRUCTURA DE LA TARJETA (CARD) */
 .card {
     display: block;
     width: calc(100% - 30px);
@@ -117,9 +112,7 @@ footer {
     line-height: 1.6;
 }
 
-/* =========================================
-   4. FORMULARIOS E INPUTS
-   ========================================= */
+/* FORMULARIOS E INPUTS */
 .card form {
     display: flex;
     flex-direction: column;
@@ -162,7 +155,7 @@ footer {
     color: #ffffff;
 }
 
-/* Botón Verde Turquesa con contraste óptimo */
+/* Botón Verde Turquesa con contraste */
 .card button {
     padding: 13px 18px;
     margin-top: 10px;
@@ -201,9 +194,7 @@ footer {
     border-top: 1px solid var(--border-color);
 }
 
-/* =========================================
-   5. CONTENEDOR VISUAL DE RESULTADOS
-   ========================================= */
+/* CONTENEDOR VISUAL DE RESULTADOS */
 .resultado,
 .arbol-visual {
     width: 100%;
@@ -239,18 +230,8 @@ footer {
     padding-left: 25px;
 }
 
-@media (max-width: 600px) {
-    .card {
-        width: calc(100% - 24px);
-        padding: 24px 18px;
-        margin: 20px auto;
-        border-radius: 16px;
-    }
-    .card h1 { font-size: 23px; }
-    .card h2 { font-size: 20px; }
-}
 
-/* Botón estilizado para regresar al menú */
+/* Botón para regresar al menú */
 .card a[href*="index.php"] {
     display: inline-block;
     margin-top: 20px;

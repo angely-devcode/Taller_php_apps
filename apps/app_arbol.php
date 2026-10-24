@@ -1,72 +1,100 @@
 <?php
 require_once '../clases/Arbol.php';
 
+/* Se inicializan las variables para guardar los errores y el resultado */
 $mensajeError = '';
 $resultadoHTML = '';
+$metodoUsado = null;
 
-/**Procesar el formulario al enviar */
+/* Se comprueba si el formulario ha sido enviado */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    /**Función para convertir la cadena ingresada ("A, B, C" o "A B C") en un arreglo */
+
+    /* Se crea una función para convertir el texto ingresado en un arreglo */
     function convertirAArreglo($cadena)
     {
+        /* Se eliminan los espacios al inicio y al final del texto */
         $cadena = trim($cadena);
+
+        /* Se devuelve un arreglo vacío si no se ha ingresado texto */
         if (empty($cadena)) {
             return [];
         }
-        /**Separar por comas o por espacios */
+
+        /* Se separan los elementos cuando hay comas o espacios */
         $elementos = preg_split('/[\s,]+/', $cadena);
+
+        /* Se organizan los elementos y se eliminan los valores vacíos */
         return array_values(array_filter($elementos));
     }
 
+    /* Se convierten los recorridos ingresados en arreglos */
     $preorden = convertirAArreglo($_POST['preorden'] ?? '');
     $inorden = convertirAArreglo($_POST['inorden'] ?? '');
     $postorden = convertirAArreglo($_POST['postorden'] ?? '');
 
-    /**Contar cuántos recorridos ingresó el usuario */
+    /* Se cuenta cuántos recorridos contienen datoos */
     $ingresados = 0;
+
     if (!empty($preorden)) $ingresados++;
     if (!empty($inorden)) $ingresados++;
     if (!empty($postorden)) $ingresados++;
 
+    /* Se verifica que se hayan ingresado al menos dos recorridos */
     if ($ingresados < 2) {
         $mensajeError = "Debes ingresar al menos dos recorridos para construir el árbol.";
     } else {
+        /* Se crea el árbol y se prepara el texto de los recorridos utilizados */
         $arbol = new Arbol();
         $detallesArreglos = "";
 
-        /**Si ingresa los tres recorridos o Preorden - Inorden, entonces usa Preorden - Inorden */
+        /* Si existen preorden e inorden, se utilizan para construir el árbol */
         if (!empty($preorden) && !empty($inorden)) {
             $arbol->raiz = $arbol->construirPreIn($preorden, $inorden);
             $metodoUsado = "Preorden e Inorden";
+
+            /* Se agregan los recorridos utilizados al resumen */
             $detallesArreglos .= "<li><strong>Preorden:</strong> " . implode(", ", $preorden) . "</li>";
             $detallesArreglos .= "<li><strong>Inorden:</strong> " . implode(", ", $inorden) . "</li>";
         }
-        /**Inorden + Postorden */
-        elseif (!empty($inorden) && !empty($postorden)) {
+
+        /* Si no se cumple la condición anterior, se revisa si hay inorden y postorden */ elseif (!empty($inorden) && !empty($postorden)) {
             $arbol->raiz = $arbol->construirInPost($inorden, $postorden);
             $metodoUsado = "Inorden y Postorden";
+
+            /* Se agregan los recorridos utilizados al resumen */
             $detallesArreglos .= "<li><strong>Inorden:</strong> " . implode(", ", $inorden) . "</li>";
             $detallesArreglos .= "<li><strong>Postorden:</strong> " . implode(", ", $postorden) . "</li>";
         }
-        /**Preorden + Postorden */
-        elseif (!empty($preorden) && !empty($postorden)) {
+
+        /* Si no hay inorden, se utilizan preorden y postorden */ elseif (!empty($preorden) && !empty($postorden)) {
             $arbol->raiz = $arbol->construirPrePost($preorden, $postorden);
             $metodoUsado = "Preorden y Postorden";
+
+            /* Se agregan los recorridos utilizados al resumen */
             $detallesArreglos .= "<li><strong>Preorden:</strong> " . implode(", ", $preorden) . "</li>";
             $detallesArreglos .= "<li><strong>Postorden:</strong> " . implode(", ", $postorden) . "</li>";
         }
 
+        /* Se comprueba si se ha creado una raíz para el árbol */
         if ($arbol->raiz !== null) {
+
+            /* Se prepara el mensaje con el método de construcción utilizado */
             $resultadoHTML = "<p>Árbol construido exitosamente usando <strong>$metodoUsado</strong>:</p>";
+
+            /* Se agregan los recorridos y el título de la estructura */
             $resultadoHTML .= "<ul>" . $detallesArreglos . "</ul>";
             $resultadoHTML .= "<h3>Estructura del Árbol:</h3>";
+
+            /* Se obtiene la representacion HTML del árbol */
             $resultadoHTML .= $arbol->imprimirArbolHTML();
         } else {
+            /* Se muestra un mensaje si no se pudo construir el árbol */
             $mensajeError = "No se pudo construir el árbol. Verifica que los recorridos sean válidos y consistentes.";
         }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 

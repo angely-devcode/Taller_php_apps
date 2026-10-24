@@ -1,25 +1,36 @@
 <?php
 require_once '../clases/Binarios.php';
-$resultado = '';
 
+/* Se inicializa la variable que guardará el resultado */
+$resultado = '';
+$numero = null;
+
+/* Se comprueba si se ha enviado el formulario */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    /* Se obtiene el numro ingresado por el usuario */
     $numero = $_POST['numero'];
+
+    /* Se convierte el valor ingresado a un número entero */
     $numero = (int)$numero;
 
     $convertidor = new Binario();
+
+    /* Se llama al método que realiza la conversión a binario */
     $resultado = $convertidor->convertirBinario($numero);
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Decimal a Binario</title>
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/binarios.css">
 </head>
+
 <body>
     <div class="card">
         <h1>Convierte un número decimal a binario</h1>
@@ -32,13 +43,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <?php
+        /* Se comprueba si existe un resultdao para mostrar */
         if ($resultado !== '') {
         ?>
             <div class="resultado">
                 <strong>Número ingresado:</strong>
                 <?php echo $numero; ?>
                 <br>
-                <strong>Resultado binario:</strong>                
+                <strong>Resultado binario:</strong>
                 <?php echo $resultado; ?>
             </div>
         <?php
@@ -48,4 +60,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br><a href="../index.php">Volver al menú principal</a>
     </div>
 </body>
+
 </html>
